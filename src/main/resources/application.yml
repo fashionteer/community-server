@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: application
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: ${DATABASE_URL:jdbc:mariadb://localhost:3306/fashionteer-community}
+    username: ${DATABASE_USERNAME:user}
+    password: ${DATABASE_PASSWORD:1234}
+  jpa:
+    hibernate:
+      ddl-auto: ${DDL_AUTO:update}
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MariaDBDialect
+  sql:
+    init:
+      platform: mariadb
