@@ -16,6 +16,20 @@ jobs:
 
     runs-on: ubuntu-22.04
 
+    services:
+      mariadb:
+        image: mariadb:10.11.8
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping --silent"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=3
+        env:
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_DATABASE: testdb
+
     steps:
       - uses: actions/checkout@v3
 
@@ -24,6 +38,15 @@ jobs:
         with:
           java-version: '21'
           distribution: 'temurin'
+
+      - name: Install wait-for-it
+        run: |
+          curl -o /usr/local/bin/wait-for-it.sh https://raw.githubusercontent.com/vishnubob/wait-for-it/master/wait-for-it.sh
+          chmod +x /usr/local/bin/wait-for-it.sh
+
+      - name: Wait for MariaDB
+        run: |
+          /usr/local/bin/wait-for-it.sh localhost:3306 -t 60
 
       - name: gradlew 실행 권한 부여
         run: chmod +x gradlew
