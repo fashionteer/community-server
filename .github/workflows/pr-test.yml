@@ -28,7 +28,7 @@ jobs:
           --health-retries=3
         env:
           MYSQL_ROOT_PASSWORD: root
-          MYSQL_DATABASE: testdb
+          MYSQL_DATABASE: fashionteer-community-test
 
     steps:
       - uses: actions/checkout@v3
