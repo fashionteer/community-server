@@ -2,6 +2,7 @@ package com.fashionteer.application.account.endpoint.controller;
 
 import com.fashionteer.application.Application;
 import com.fashionteer.application.account.infra.repository.AccountRepository;
+import com.github.database.rider.core.api.dataset.DataSet;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -17,6 +18,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest(classes = Application.class)
 @AutoConfigureMockMvc
+@DataSet(cleanBefore = true)
 class AccountControllerTest {
 
     @Autowired
