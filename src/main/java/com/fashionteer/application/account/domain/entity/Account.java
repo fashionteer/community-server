@@ -43,4 +43,12 @@ public class Account extends AuditingEntity {
         @Lob @Basic(fetch = FetchType.EAGER)
         private String image;
     }
+
+    public static Account with(String email, String nickname, String password) {
+        Account account = new Account();
+        account.email = email;
+        account.nickname = nickname;
+        account.password = password;
+        return account;
+    }
 }

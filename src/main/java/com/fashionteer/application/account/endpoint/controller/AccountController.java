@@ -1,5 +1,6 @@
 package com.fashionteer.application.account.endpoint.controller;
 
+import com.fashionteer.application.account.application.AccountService;
 import com.fashionteer.application.account.endpoint.controller.form.SignUpForm;
 import com.fashionteer.application.account.endpoint.controller.validator.SignUpFormValidator;
 import jakarta.validation.Valid;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class AccountController {
 
     private final SignUpFormValidator signUpFormValidator;
+    private final AccountService accountService;
 
     @InitBinder("signUpForm")
     public void initBinder(WebDataBinder webDataBinder) {
@@ -38,6 +40,7 @@ public class AccountController {
         if (errors.hasErrors()) {
             return "account/sign-up";
         }
+        accountService.signUp(signUpForm);
         return "redirect:/";
     }
 
